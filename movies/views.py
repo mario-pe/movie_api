@@ -49,7 +49,7 @@ class CommentsViewSet(viewsets.ModelViewSet):
 
 class TopViewSet(APIView):
     def get(self, request, date_from, date_to):
-        if date_check(date_from, date_to):
+        if date_testing(date_from, date_to):
             comented_films = Comment.objects.all().values('movie').filter(date__range=[date_from, date_to]).annotate(total=Count('pk')).order_by('movie').order_by('-total')
             movie_rank = movie_rank_generator(comented_films)
             return Response(movie_rank, status=status.HTTP_201_CREATED)
@@ -57,7 +57,7 @@ class TopViewSet(APIView):
         return Response('hujowe daty synek ',status=status.HTTP_400_BAD_REQUEST)
 
 
-def date_check(date_from, date_to):
+def date_testing(date_from, date_to):
     if date_from and date_to:
         date_format = "%Y-%m-%d"
         date_from = datetime.strptime(str(date_from), date_format)
