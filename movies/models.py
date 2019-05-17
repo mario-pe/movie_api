@@ -6,7 +6,7 @@ DATE_INPUT_FORMATS = ['%d-%m-%Y']
 
 
 class Movie(models.Model):
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=50, unique=True)
     year = models.CharField(max_length=5)
     rated = models.CharField(max_length=5)
     released = models.CharField(max_length=20) #25 Jan 2008
@@ -20,6 +20,7 @@ class Movie(models.Model):
     country = models.CharField(max_length=100)
     awards = models.CharField(max_length=100)
     poster = models.CharField(max_length=200)
+    metascore = models.CharField(max_length=10)
     imdbRating = models.CharField(max_length=10)
     imdbVotes = models.CharField(max_length=15) #"200,799",
     imdbID = models.CharField(max_length=15)
