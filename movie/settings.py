@@ -25,7 +25,7 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 
-ALLOWED_HOSTS = ['movie-api-mp.herokuapp.com']
+ALLOWED_HOSTS = ['movie-api-mp.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
