@@ -12,11 +12,14 @@ Clone repository from github.com, you can do it by using command.
 ```git clone https://github.com/mario-pe/movie_api.git ``` 
 
 
-In directory where you clone a repository, use comand 
+In directory where you clone a repository, use command 
 
 ```./movie_api/run_movie_api```
 
 Wait a second script prepare virtual environment for application and install into all requirements and run the server
+
+
+http://127.0.0.1:8000/movies/
 
 ## User Guidline
 
