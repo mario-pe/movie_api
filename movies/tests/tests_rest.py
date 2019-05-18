@@ -1,5 +1,4 @@
 from datetime import datetime
-from unittest import mock
 
 from django.test import TestCase
 from rest_framework import status
@@ -7,7 +6,6 @@ from rest_framework.test import APIRequestFactory
 
 from movies.models import Movie, Comment
 from movies.tests.factories import MovieFactory, CommentFactory, RatingsFactory
-from movies.tests.data_test import correct_data, incorrect_data
 from movies.views import MoviesView, CommentsViewSet, TopViewSet
 
 factory = APIRequestFactory()
@@ -53,11 +51,8 @@ class MovieTests(TestCase):
         self.assertEquals(response.data.get('Title'), "Title_foo")
         self.assertEqual(len(response.data.get('Ratings')), 2)
 
-    @mock.patch('movies.omdb_service.OmdbService.get_movie_data')
-    def test_should_return_and_create_from_data_fetch_from_service(self, service):
-        service.return_value = correct_data
-
-        request = factory.post('/movies/', {"title": "Ramabo"}, format='json')
+    def test_should_return_and_create_instance_from_data_fetch_from_service(self):
+        request = factory.post('/movies/', {"title": "Rambo"}, format='json')
         view = MoviesView.as_view()
         response = view(request)
 
@@ -66,11 +61,8 @@ class MovieTests(TestCase):
         self.assertEquals(len(Movie.objects.all()), 4)
         self.assertEqual(len(response.data.get('Ratings')), 3)
 
-    @mock.patch('movies.omdb_service.OmdbService.get_movie_data')
-    def test_should_return_response_status_404_if_move_title_not_exist_in_sevice(self, service):
-        service.return_value = incorrect_data
-
-        request = factory.post('/movies/', {"title": "Ramabo"}, format='json')
+    def test_should_return_response_status_404_if_move_title_not_exist_in_sevice(self):
+        request = factory.post('/movies/', {"title": "Ramasdabo"}, format='json')
         view = MoviesView.as_view()
         response = view(request)
 
@@ -78,10 +70,7 @@ class MovieTests(TestCase):
         self.assertEquals(response.data, {'Error': 'Movie not found!'})
         self.assertEquals(len(Movie.objects.all()), 3)
 
-    @mock.patch('movies.omdb_service.OmdbService.get_movie_data')
-    def test_should_return_response_status_404_if_title_not_exist_in_request_data(self, service):
-        service.return_value = incorrect_data
-
+    def test_should_return_response_status_404_if_title_not_exist_in_request_data(self):
         request = factory.post('/movies/', {"not_a_title": "Ramabo"}, format='json')
         view = MoviesView.as_view()
         response = view(request)
@@ -90,10 +79,8 @@ class MovieTests(TestCase):
         self.assertEquals(response.data, {'Error': 'Data not valid! Request must contains \'title\' key.'})
         self.assertEquals(len(Movie.objects.all()), 3)
 
-    @mock.patch('movies.omdb_service.OmdbService.get_movie_data')
-    def test_should_return_response_status_200_if_part_of_title_was_given_of_existing_movie_in_DB(self, service):
-        MovieFactory.build(title="Rambo").save()
-        service.return_value = correct_data
+    def test_should_return_response_status_200_if_part_of_title_was_given_of_existing_movie_in_DB(self):
+        MovieFactory.build(title="Goliyon Ki Rasleela Ram-Leela").save()
 
         request = factory.post('/movies/', {"title": "Ram"}, format='json')
         view = MoviesView.as_view()
