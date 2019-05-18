@@ -39,7 +39,7 @@ class MovieTests(TestCase):
         self.assertEquals(response.data.get('Title'), "Title_example")
         self.assertEqual(len(response.data.get('Ratings')), 0)
 
-    def test_should_return_movie_data_with_ratings_if_exist_in_DB(self):
+    def test_should_return_movie_and_related_ratings_data_if_exist_in_DB(self):
         MovieFactory.build(title="Title_foo").save()
         movie = Movie.objects.filter(title="Title_foo").first()
         RatingsFactory.build(movie_id=movie.pk).save()
@@ -54,7 +54,7 @@ class MovieTests(TestCase):
         self.assertEqual(len(response.data.get('Ratings')), 2)
 
     @mock.patch('movies.omdb_service.OmdbService.get_movie_data')
-    def test_should_return_and_movie_data_fetch_from_service(self, service):
+    def test_should_return_and_create_from_data_fetch_from_service(self, service):
         service.return_value = correct_data
         request = factory.post('/movies/', {"title": "Ramabo"}, format='json')
         view = MoviesView.as_view()
@@ -62,6 +62,7 @@ class MovieTests(TestCase):
 
         self.assertEquals(response.status_code, status.HTTP_201_CREATED)
         self.assertEquals(response.data.get('Title'), "Rambo")
+        self.assertEquals(len(Movie.objects.all()), 4)
         self.assertEqual(len(response.data.get('Ratings')), 3)
 
     @mock.patch('movies.omdb_service.OmdbService.get_movie_data')

@@ -1,14 +1,18 @@
+from movies.models import Comment, Movie, Ratings
 from rest_framework import serializers
-from .models import Comment, Movie, Ratings
 
 
 class CommentSerializer(serializers.ModelSerializer):
+    """Comment model serializer"""
+
     class Meta:
         model = Comment
         fields = ['id', 'content', 'movie']
 
 
 class RatingsSerializer(serializers.ModelSerializer):
+    """Ratings model serializer"""
+
     Source = serializers.CharField(source='source')
     Value = serializers.CharField(source='value')
 
@@ -18,6 +22,8 @@ class RatingsSerializer(serializers.ModelSerializer):
 
 
 class MovieSerializer(serializers.ModelSerializer):
+    """Movie model serializer """
+
     Title = serializers.CharField(source='title')
     Year = serializers.CharField(source='year')
     Rated = serializers.CharField(source='rated')
@@ -47,6 +53,12 @@ class MovieSerializer(serializers.ModelSerializer):
                   'BoxOffice', 'Production', 'Website', 'Response', 'Ratings']
 
     def create(self, validated_data):
+        """
+        Method create movie object and related ratings objects
+
+        :param: validated_data
+        :return: movie instance
+        """
         ratings_data = validated_data.pop('ratings')
         movie = Movie.objects.create(**validated_data)
         for rating_data in ratings_data:
