@@ -17,3 +17,4 @@ class OmdbService:
         response = requests.get(url, timeout=timeout_seconds)
         if response.status_code == 200:
             return response.json()
+        return {}

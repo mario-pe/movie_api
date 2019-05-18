@@ -14,14 +14,16 @@ class OmdbServiceTest(TestCase):
         mock_resp = Mock(status_code=200)
         mock_get.return_value = mock_resp
         mock_get.return_value.json.return_value = correct_data
+
         result = OmdbService.get_movie_data('title')
 
         self.assertDictEqual(result, correct_data)
 
     @mock.patch('requests.get')
-    def test_should_return_None_if_response_status_is_diffrent_than_200(self, mock_get):
+    def test_should_return_empty_dictionary_if_response_status_is_diffrent_than_200(self, mock_get):
         mock_resp = Mock(status_code=404)
         mock_get.return_value = mock_resp
+
         result = OmdbService.get_movie_data('title')
 
-        self.assertEquals(result, None)
+        self.assertEquals(result, {})

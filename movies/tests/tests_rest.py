@@ -56,6 +56,7 @@ class MovieTests(TestCase):
     @mock.patch('movies.omdb_service.OmdbService.get_movie_data')
     def test_should_return_and_create_from_data_fetch_from_service(self, service):
         service.return_value = correct_data
+
         request = factory.post('/movies/', {"title": "Ramabo"}, format='json')
         view = MoviesView.as_view()
         response = view(request)
@@ -67,8 +68,8 @@ class MovieTests(TestCase):
 
     @mock.patch('movies.omdb_service.OmdbService.get_movie_data')
     def test_should_return_response_status_404_if_move_title_not_exist_in_sevice(self, service):
-
         service.return_value = incorrect_data
+
         request = factory.post('/movies/', {"title": "Ramabo"}, format='json')
         view = MoviesView.as_view()
         response = view(request)
@@ -80,6 +81,7 @@ class MovieTests(TestCase):
     @mock.patch('movies.omdb_service.OmdbService.get_movie_data')
     def test_should_return_response_status_404_if_title_not_exist_in_request_data(self, service):
         service.return_value = incorrect_data
+
         request = factory.post('/movies/', {"not_a_title": "Ramabo"}, format='json')
         view = MoviesView.as_view()
         response = view(request)
@@ -87,6 +89,18 @@ class MovieTests(TestCase):
         self.assertEquals(response.status_code, status.HTTP_404_NOT_FOUND)
         self.assertEquals(response.data, {'Error': 'Data not valid! Request must contains \'title\' key.'})
         self.assertEquals(len(Movie.objects.all()), 3)
+
+    @mock.patch('movies.omdb_service.OmdbService.get_movie_data')
+    def test_should_return_response_status_200_if_part_of_title_was_given_of_existing_movie_in_DB(self, service):
+        MovieFactory.build(title="Rambo").save()
+        service.return_value = correct_data
+
+        request = factory.post('/movies/', {"title": "Ram"}, format='json')
+        view = MoviesView.as_view()
+        response = view(request)
+
+        self.assertEquals(response.status_code, status.HTTP_200_OK)
+        self.assertEquals(len(Movie.objects.all()), 4)
 
 
 class CommentsTests(TestCase):

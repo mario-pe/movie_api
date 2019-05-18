@@ -34,6 +34,9 @@ class MoviesView(APIView):
                 return Response(movie_serializer.data, status=status.HTTP_200_OK)
             else:
                 api_movie_data = OmdbService.get_movie_data(title)
+                movie = Movie.objects.filter(title=api_movie_data.get('Title')).first()
+                if movie:
+                    return Response(api_movie_data, status=status.HTTP_200_OK)
                 movie_serializer = MovieSerializer(data=api_movie_data)
                 if movie_serializer.is_valid():
                     movie_serializer.save()
