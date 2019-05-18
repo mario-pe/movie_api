@@ -68,7 +68,7 @@ class TopViewSet(APIView):
         date_from = request.query_params.get('date_from')
         date_to =request.query_params.get('date_to')
         if date_testing(date_from, date_to):
-            comented_films = Comment.objects.values('movie').filter(date__range=[date_from, date_to]).annotate(total=Count('pk')).order_by('movie').order_by('total')
+            comented_films = Comment.objects.values('movie').filter(date__range=[date_from, date_to]).annotate(total=Count('pk')).order_by('movie').order_by('-total')
             movie_rank = movie_rank_generator(comented_films)
             return Response(movie_rank, status=status.HTTP_200_OK)
         return Response(message_generator('Incorrect dates'), status=status.HTTP_400_BAD_REQUEST)
