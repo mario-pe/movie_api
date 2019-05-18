@@ -7,8 +7,8 @@ DATE_INPUT_FORMATS = ['%d-%m-%Y']
 
 class Movie(models.Model):
     title = models.CharField(max_length=50, unique=True)
-    year = models.CharField(max_length=5)
-    rated = models.CharField(max_length=5)
+    year = models.CharField(max_length=20)
+    rated = models.CharField(max_length=20)
     released = models.CharField(max_length=20) #25 Jan 2008
     runtime = models.CharField(max_length=8)
     genre = models.CharField(max_length=50)

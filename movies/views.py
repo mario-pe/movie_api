@@ -39,7 +39,7 @@ class MoviesView(APIView):
                     return Response(api_movie_data, status=status.HTTP_200_OK)
                 movie_serializer = MovieSerializer(data=api_movie_data)
                 if movie_serializer.is_valid():
-                    movie_serializer.save()
+                    # movie_serializer.save()
                     return Response(movie_serializer.data, status=status.HTTP_201_CREATED)
                 else:
                     return Response(message_generator("Movie not found!"), status=status.HTTP_404_NOT_FOUND)
