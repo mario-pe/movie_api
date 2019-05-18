@@ -8,11 +8,8 @@ class OmdbService:
         """
         Method fatch movie data from omdb service
 
-        Args:
-            title: title of movie data to fatch
-
-        Returns:
-            Dictionaty with movie data or None if service have not information about given title
+        :param title: title of movie data to fatch
+        :return: Dictionaty with movie data or None if service have not information about given title
         """
 
         url = 'http://www.omdbapi.com/?t={}&apikey={}'.format(title, OMDB_API_KEY)

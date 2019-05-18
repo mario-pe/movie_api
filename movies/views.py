@@ -16,7 +16,7 @@ class MoviesView(APIView):
     Return a list of all movies stored in data base.
 
     post:
-    Returns movie data with given title straight from database if a movie with a title existing in data base
+    Returns movie data with given title straight from database if a movie existing in data base
     or fatch movie data from external service and create a new movie instance.
     """
     def get(self, request):
