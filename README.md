@@ -18,11 +18,11 @@ In directory where you clone a repository, use comand
 
 Wait a second script prepare virtual environment for application and install into all requirements and run the server
 
-##User Guidline
+## User Guidline
 
 The application is deployed on Heroku link to a application https://movie-api-mp.herokuapp.com/movies/
 
-###Good URL examples
+### Good URL examples
 
 * List of movie stored in data base.
 
