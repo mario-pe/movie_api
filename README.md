@@ -1,9 +1,9 @@
 ## Run the application
 Prepare directory to clone a application.
 
-*mkdir movie_api* 
+```mkdir movie_api``` 
 
-*cd movie_api*
+```cd movie_api```
 
 You can check source code on my public GitHub [repository](https://github.com/mario-pe/movie_api/tree/master).
 
