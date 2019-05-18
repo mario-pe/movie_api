@@ -14,7 +14,7 @@ Clone repository from github.com, you can do it by using command.
 
 In directory where you clone a repository, use comand 
 
-```./run_movie_api```
+```./movie_api/run_movie_api```
 
 Wait a second script prepare virtual environment for application and install into all requirements and run the server
 
