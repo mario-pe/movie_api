@@ -2,14 +2,12 @@ from datetime import datetime
 
 from django.db import models
 
-DATE_INPUT_FORMATS = ['%d-%m-%Y']
-
 
 class Movie(models.Model):
     title = models.CharField(max_length=50, unique=True)
     year = models.CharField(max_length=20)
     rated = models.CharField(max_length=20)
-    released = models.CharField(max_length=20) #25 Jan 2008
+    released = models.CharField(max_length=20)
     runtime = models.CharField(max_length=8)
     genre = models.CharField(max_length=50)
     director = models.CharField(max_length=100)
