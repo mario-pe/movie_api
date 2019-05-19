@@ -1,7 +1,7 @@
 from django.test import TestCase
 
-from movies.omdb_service import OmdbService
-from movies.tests.data_test import correct_data, incorrect_data
+from movie.omdb_service import OmdbService
+from movie.tests.data_test import correct_data, incorrect_data
 
 
 class OmdbServiceTest(TestCase):

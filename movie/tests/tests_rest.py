@@ -4,9 +4,9 @@ from django.test import TestCase
 from rest_framework import status
 from rest_framework.test import APIRequestFactory
 
-from movies.models import Movie, Comment
-from movies.tests.factories import MovieFactory, CommentFactory, RatingsFactory
-from movies.views import MoviesView, CommentsViewSet, TopViewSet
+from movie.models import Movie, Comment
+from movie.tests import MovieFactory, CommentFactory, RatingsFactory
+from movie.views import MoviesView, CommentsViewSet, TopViewSet
 
 factory = APIRequestFactory()
 

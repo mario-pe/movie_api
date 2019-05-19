@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from movies.views import date_testing, movie_rank_generator
+from movie.views import date_testing, movie_rank_generator
 
 
 class DataTestingTests(TestCase):

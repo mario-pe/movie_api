@@ -1,9 +1,9 @@
 from datetime import datetime
 from django.db.models import Count
 from django_filters.rest_framework import DjangoFilterBackend
-from movies.models import Movie, Comment
-from movies.omdb_service import OmdbService
-from movies.serializers import CommentSerializer, MovieSerializer
+from movie.models import Movie, Comment
+from movie.omdb_service import OmdbService
+from movie.serializers import CommentSerializer, MovieSerializer
 from rest_framework.parsers import JSONParser
 from rest_framework.views import APIView
 from rest_framework.response import Response

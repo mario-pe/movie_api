@@ -2,7 +2,7 @@ from datetime import datetime
 
 import factory
 
-from movies.models import Movie, Ratings, Comment
+from movie.models import Movie, Ratings, Comment
 
 
 class MovieFactory(factory.Factory):

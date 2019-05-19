@@ -1,4 +1,4 @@
-from movies.models import Comment, Movie, Ratings
+from movie.models import Comment, Movie, Ratings
 from rest_framework import serializers
 
 

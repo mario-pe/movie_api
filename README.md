@@ -37,7 +37,7 @@ The application is deployed on Heroku link to a application https://movie-api-mp
     * request body: 
         ```
         {
-	           title": "rambo"
+	           "title": "rambo"
         }
         ```
 * List all comments in database.
@@ -63,7 +63,7 @@ The application is deployed on Heroku link to a application https://movie-api-mp
     
     * movie parameter must by a movie pk
     
-        Get https://movie-api-mp.herokuapp.com/comments?movie=blade runner
+        Get https://movie-api-mp.herokuapp.com/comments?movie=bladerunner
 
 * List most commnted movies in period of time between dates. 
     
