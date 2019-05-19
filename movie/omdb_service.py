@@ -6,10 +6,10 @@ class OmdbService:
 
     def get_movie_data(title):
         """
-        Method fatch movie data from omdb service
+        Method fatch movie data from omdb service.
 
-        :param title: title of movie data to fatch
-        :return: Dictionaty with movie data or None if service have not information about given title
+        :param title: title of movie data to fatch.
+        :return: Dictionary with data fetched from service.
         """
 
         url = 'http://www.omdbapi.com/?t={}&apikey={}'.format(title, OMDB_API_KEY)

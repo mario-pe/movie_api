@@ -16,7 +16,7 @@ class MoviesView(APIView):
     Return a list of all movies stored in data base.
 
     post:
-    Returns movie data with given title straight from database if a movie existing in data base
+    Returns movie data with given title straight from database if an existing movie is in data base
     or fatch movie data from external service and create a new movie instance.
     """
     def get(self, request):
@@ -39,7 +39,7 @@ class MoviesView(APIView):
                     return Response(api_movie_data, status=status.HTTP_200_OK)
                 movie_serializer = MovieSerializer(data=api_movie_data)
                 if movie_serializer.is_valid():
-                    # movie_serializer.save()
+                    movie_serializer.save()
                     return Response(movie_serializer.data, status=status.HTTP_201_CREATED)
                 else:
                     return Response(message_generator("Movie not found!"), status=status.HTTP_404_NOT_FOUND)
@@ -65,7 +65,7 @@ class TopViewSet(APIView):
     """
     get:
     Return a sorted list of most comment movies in given date period.
-    Necessary to function are two queryparams: date_from, date_to.
+    Necessary to process are two queryparams: date_from, date_to.
     """
     def get(self, request):
         date_from = request.query_params.get('date_from')
@@ -100,10 +100,11 @@ def date_testing(date_from, date_to):
 
 def movie_rank_generator(commented_movies):
     """
-    Method retrive a list that contains dictionaries with movie id and number of comments and add ranking position as rank.
+    This method processes a list of dictionaries with a movie id and the quantity of comments
+    and adds a place in the ranking as a rank
 
     :param commented_movies: list
-    :return: return processed list or empty list if there was
+    :return: return processed list or an empty list if was given
     """
     rank = 0
     temp_total = 0
@@ -119,7 +120,7 @@ def movie_rank_generator(commented_movies):
 
 def message_generator(message):
     """
-    Generate dictionaty with 'Error' key and message value.
+    Method generate dictionaty with 'Error' key and  the value of the transfered message.
 
     :param message: str
     :return: dictionary

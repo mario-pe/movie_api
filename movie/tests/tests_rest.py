@@ -5,7 +5,7 @@ from rest_framework import status
 from rest_framework.test import APIRequestFactory
 
 from movie.models import Movie, Comment
-from movie.tests import MovieFactory, CommentFactory, RatingsFactory
+from movie.tests.factories import MovieFactory, RatingsFactory, CommentFactory
 from movie.views import MoviesView, CommentsViewSet, TopViewSet
 
 factory = APIRequestFactory()

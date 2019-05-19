@@ -16,7 +16,7 @@ In directory where you clone a repository, use command
 
 ```cd movie_api &&  chmod u+x run_movie_api.sh && ./run_movie_api.sh```
 
-Wait a second script prepare virtual environment for application and install into all requirements and run the server
+Wait a second, script prepare virtual environment for application and install into all requirements and run the server
 
 
 http://127.0.0.1:8000/movies/
@@ -61,7 +61,7 @@ The application is deployed on Heroku link to a application https://movie-api-mp
 
 * List of comments related with chosen movie.
     
-    * movie parameter must by a movie pk
+    * movie parameter must be a movie pk
     
         Get https://movie-api-mp.herokuapp.com/comments?movie=bladerunner
 
